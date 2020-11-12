@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCapters extends Migration
+class CreateChapters extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCapters extends Migration
      */
     public function up()
     {
-        Schema::create('capters', function (Blueprint $table) {
+        Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
@@ -28,6 +28,6 @@ class CreateCapters extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('capters');
+        Schema::dropIfExists('chapters');
     }
 }
