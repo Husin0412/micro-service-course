@@ -72,7 +72,7 @@ class LessonController extends Controller
 
         $lesson = Lesson::create($data);
         return \response()->json([
-            'status' => 'error',
+            'status' => 'success',
             'data' => $lesson,
         ]);
 
@@ -118,7 +118,7 @@ class LessonController extends Controller
         $lesson->fill($data);
         $lesson->save();
         return response()->json([
-            'status' => 'error',
+            'status' => 'success',
             'data' => $lesson,
         ]);
 

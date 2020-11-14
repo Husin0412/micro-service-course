@@ -39,7 +39,7 @@ class ImageCourseController extends Controller
 
         $imageCourse = ImageCourse::create($data);
         return response()->json([
-            'status' => 'error',
+            'status' => 'success',
             'data' => $imageCourse,
         ]);
 

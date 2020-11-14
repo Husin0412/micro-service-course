@@ -70,7 +70,7 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'rating' => 'required|integer|min:1|max:5',
+            'rating' => 'integer|min:1|max:5',
             'note' => 'string',
         ];
 
@@ -97,7 +97,7 @@ class ReviewController extends Controller
         $review->save();
 
         return \response()->json([
-            'status' => 'error',
+            'status' => 'success',
             'data' => $review,
         ]);
 
