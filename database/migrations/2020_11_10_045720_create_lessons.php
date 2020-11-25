@@ -17,7 +17,7 @@ class CreateLessons extends Migration
             $table->id();
             $table->string('name');
             $table->string('video');
-            $table->foreignId('chapter_id')->constrained('capters')->onDelete('cascade');
+            $table->foreignId('chapter_id')->constrained('chapters')->onDelete('cascade');
             $table->timestamps();
         });
     }
