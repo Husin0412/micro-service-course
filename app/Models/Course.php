@@ -10,7 +10,7 @@ class Course extends Model
     protected $table = 'courses';
 
     protected $fillable = [
-        'name', 'certificate', 'thumbnuil', 'type',
+        'name', 'certificate', 'thumbnail', 'type',
         'status', 'price', 'level', 'description', 'mentor_id',
     ];
 
