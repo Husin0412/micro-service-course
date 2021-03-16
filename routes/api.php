@@ -31,13 +31,16 @@ Route::get('mentors/{id}', [MentorController::class, 'show']);
 Route::post('mentors', [MentorController::class, 'create']);
 Route::put('mentors/{id}', [MentorController::class, 'update']);
 Route::delete('mentors/{id}', [MentorController::class, 'destroy']);
+Route::post('mentors/search', [MentorController::class, 'search']);
 
 // course
 Route::get('courses', [CourseController::class, 'index']);
+Route::get('courses/all', [CourseController::class, 'all']);
 Route::get('courses/{id}', [CourseController::class, 'show']);
 Route::post('courses', [CourseController::class, 'create']);
 Route::put('courses/{id}', [CourseController::class, 'update']);
 Route::delete('courses/{id}', [CourseController::class, 'destroy']);
+Route::post('courses/search', [CourseController::class, 'search']);
 
 // chapter
 Route::get('chapters', [ChapterController::class, 'index']);

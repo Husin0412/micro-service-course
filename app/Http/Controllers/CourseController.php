@@ -9,6 +9,7 @@ use App\Models\MyCourse;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class CourseController extends Controller
 {
@@ -79,7 +80,7 @@ class CourseController extends Controller
         $rules = [
             'name' => 'required|string',
             'certificate' => 'required|boolean',
-            'thumbnail' => 'string|url',
+            // 'thumbnail' => 'string|url',
             'type' => 'required|in:free,premium',
             'status' => 'required|in:draft,published',
             'price' => 'integer',
@@ -121,7 +122,7 @@ class CourseController extends Controller
         $rules = [
             'name' => 'string',
             'certificate' => 'boolean',
-            'thumbnail' => 'string|url',
+            // 'thumbnail' => 'string|url',
             'type' => 'in:free,premium',
             'status' => 'in:draft,published',
             'price' => 'integer',
@@ -186,5 +187,33 @@ class CourseController extends Controller
             'message' => 'course deleted',
         ]);
     }
+    
+    public function all(Request $request)
+    {
+        $course = Course::query();
 
+        $q = $request->query('q');
+        // filter
+        $course->when($q, function ($query) use ($q) {
+            return $query->whereRaw("name LIKE '%" . strtolower($q) . "%' ");
+        });
+        //
+        return \response()->json([
+            'status' => 'success',
+            'data' => $course->get(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('data');
+        $search_courses = DB::table('courses')->where( function($query) use ($search) {
+            $query->where('name','like','%'.$search.'%');
+        })->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $search_courses,
+        ]);
+    }
 }

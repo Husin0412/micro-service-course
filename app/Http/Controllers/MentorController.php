@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mentor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class MentorController extends Controller
 {
@@ -103,6 +104,19 @@ class MentorController extends Controller
             'data' => $mentor,
         ], 200);
 
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('data');
+        $search_mentor = DB::table('mentors')->where( function($query) use ($search) {
+            $query->where('name','like','%'.$search.'%');
+        })->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $search_mentor,
+        ]);
     }
 
     public function destroy($id)
