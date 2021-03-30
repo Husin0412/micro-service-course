@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Validator;
 
 class ImageCourseController extends Controller
 {
+    public function index(Request $request)
+    {
+        $imageCourse = ImageCourse::query();
+        $courseId = $request->query('course_id');
+
+        $imageCourse->when($courseId, function ($query) use ($courseId) {
+            return $query->where('course_id', '=', $courseId);
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $imageCourse->get()
+        ]);
+    }
+
     public function create(Request $request)
     {
         $rules = [
